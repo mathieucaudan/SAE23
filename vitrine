@@ -34,6 +34,33 @@ echo"<!DOCTYPE html>
                 min-height: 90%;
             }
         </style>
+        <div id='Pizza' class='w3-container menu w3-padding-32 w3-white'>
+                <h1><b>Margherita</b> <span class='w3-right w3-tag w3-dark-grey w3-round'>$12.50</span></h1>
+                <p class='w3-text-grey'>Tomate Fariche, Mozzarella, Basilic</p>
+                <hr>
+
+                <h1><b>Formaggio</b> <span class='w3-right w3-tag w3-dark-grey w3-round'>$15.50</span></h1>
+                <p class='w3-text-grey'>Quatre Fromages (Mozzarella, Parmesan, Pecorino, Jarlsberg)</p>
+                <hr>
+
+                <h1><b>Chicken</b> <span class='w3-right w3-tag w3-dark-grey w3-round'>$17.00</span></h1>
+                <p class='w3-text-grey'>Tomate Fariche, Mozzarella, POulet, Oignons</p>
+                <hr>
+
+                <h1><b>L'heure de l'ananas</b> <span class='w3-right w3-tag w3-dark-grey w3-round'>$16.50</span></h1>
+                <p class='w3-text-grey'>Tomate Fraiche, Mozzarella, Ananas Frais, Bacon, Basilic Frais</p>
+                <hr>
+
+                <h1><b>Meat Town</b> <span class='w3-tag w3-red w3-round'>Hot!</span><span
+                        class='w3-right w3-tag w3-dark-grey w3-round'>$20.00</span></h1>
+                <p class='w3-text-grey'>Tomates Fraiches, Mozzarella, Pepporoni, SAuce Piquante, boeuf, Poulet</p>
+                <hr>
+
+                <h1><b>Parma</b> <span class='w3-tag w3-grey w3-round'>New</span><span
+                        class='w3-right w3-tag w3-dark-grey w3-round'>$21.50</span></h1>
+                <p class='w3-text-grey'>Tomates Fraiches, Mozzarella, Jambon de parme, Bacon, Salade fraiche</p>
+            </div>
+
     </head>
 <body>
 
@@ -44,10 +71,13 @@ echo"<!DOCTYPE html>
             <a href='#menu' class='w3-bar-item w3-button'>MENU</a>
             <a href='#about' class='w3-bar-item w3-button'>INFO</a>
             <a href='#myMap' class='w3-bar-item w3-button'>CONTACT</a>
+            <a href='#'><img src='logo.png' style='float: right; width: 3%; border-radius: 50%' ></a>
+
+            
         </div>
     </div>
 
-    <!-- Header with image -->
+    <!-- Header -->
     <header class='bgimg w3-display-container w3-grayscale-min' id='home'>
         <div class='w3-display-bottomleft w3-padding'>
             <span class='w3-tag w3-xlarge'>Ouvert tout les midi</span>
@@ -59,7 +89,7 @@ echo"<!DOCTYPE html>
         </div>
     </header>
 
-    <!-- Menu Container -->
+    <!-- Menu -->
     <div class='w3-container w3-black w3-padding-64 w3-xxlarge' id='menu'>
         <div class='w3-content'>
 
@@ -143,7 +173,7 @@ echo"<!DOCTYPE html>
         </div>
     </div>
 
-    <!-- About Container -->
+    <!-- Contact -->
     <div class='w3-container w3-padding-64 w3-red w3-grayscale w3-xlarge' id='about'>
         <div class='w3-content'>
             <h1 class='w3-center w3-jumbo' style='margin-bottom:64px'>Qui Sommes Nous</h1>
@@ -205,6 +235,7 @@ echo"<!DOCTYPE html>
     <!-- Bas de page fin. -->
     </footer>"?>
 
+
     <script>
         // Tabbed Menu
         function openMenu(evt, menuName) {
@@ -221,8 +252,9 @@ echo"<!DOCTYPE html>
             evt.currentTarget.firstElementChild.className += ' w3-red';
         }
         document.getElementById('myLink').click();
-    </script>
-<?php echo"
+    </script><?php"
+
 </body>
 
-</html>"?>
+</html>"
+?>
