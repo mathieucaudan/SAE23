@@ -61,7 +61,26 @@ function navbar(){
             <a href='info.php' class='w3-bar-item w3-button'>INFO</a>
             <a href='contact.php' class='w3-bar-item w3-button'>CONTACT</a>
             <a href='#'><img src='logo.png' style='float: right; width: 3%; border-radius: 50%' ></a>
-
+            <a href='connexion.php' style='float: right'><button type='button'>Connexion</button></a>
+            <style>
+            button {
+                width: 100px;
+                height: 40px;
+                background-color: #FFFFFF;
+                color: #FFFFFF
+                font-size: 10px;
+                display: inline-block;
+                border-radius: 5px;
+                border: 4px double #00000;
+                text-align: center;
+                -webkit-transition: all 0.5s;
+                -moz-transition: all 0.5s;
+                -o-transition: all 0.5s;
+                transition: all 0.5s;
+                cursor: pointer;
+                margin: 5px; 
+            }
+            </style>
             
         </div>
     </div>";
