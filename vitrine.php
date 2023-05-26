@@ -31,7 +31,7 @@ function entete() {
             .bgimg {
                 background-repeat: no-repeat;
                 background-size: cover;
-                background-image: url('https://www.w3schools.com/w3images/pizza.jpg');
+                background-image: url('pizza_accueil.jpg');
                 min-height: 90%;
             }
         </style>
