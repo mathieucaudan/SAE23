@@ -34,7 +34,23 @@ function entete() {
                 background-image: url('https://www.w3schools.com/w3images/pizza.jpg');
                 min-height: 90%;
             }
-
+        </style>
+          <script type='text/javascript'>
+        function openMenu(evt, menuName) {
+            console.log('test menu');
+            var i, x, tablinks;
+            x = document.getElementsByClassName('menu');
+            for (i = 0; i < x.length; i++) {
+                x[i].style.display = 'none';
+            }
+            tablinks = document.getElementsByClassName('tablink');
+            for (i = 0; i < x.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(' w3-red', '');
+            }
+            document.getElementById(menuName).style.display = 'block';
+            evt.currentTarget.firstElementChild.className += ' w3-red';
+        }
+        </script>
     </head>";
     };
 function navbar(){
@@ -58,23 +74,6 @@ function footer(){
     </footer>";
     }
 function menu(){
-    echo"</style>
-          <script type='text/javascript'>
-        function openMenu(evt, menuName) {
-            console.log('test menu');
-            var i, x, tablinks;
-            x = document.getElementsByClassName('menu');
-            for (i = 0; i < x.length; i++) {
-                x[i].style.display = 'none';
-            }
-            tablinks = document.getElementsByClassName('tablink');
-            for (i = 0; i < x.length; i++) {
-                tablinks[i].className = tablinks[i].className.replace(' w3-red', '');
-            }
-            document.getElementById(menuName).style.display = 'block';
-            evt.currentTarget.firstElementChild.className += ' w3-red';
-        }
-        </script>";
     echo"<div class='w3-container w3-black w3-padding-64 w3-xxlarge' id='menu'>
         <div class='w3-content'>
 
@@ -132,7 +131,7 @@ function menu(){
                 <p class='w3-text-grey'>Tomates Fraiche, Oignons, Boeuf Haché</p>
                 <hr>
 
-                <h1><b>Pates de la Mer</b> <span class='w3-right w3-tag w3-dark-grey w3-round'>$25.50</span></h1>
+                <h1><b>Pates de la mer</b> <span class='w3-right w3-tag w3-dark-grey w3-round'>$25.50</span></h1>
                 <p class='w3-text-grey'>Saumon, Crevette, Homard, Ail</p>
             </div>
 
