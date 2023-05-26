@@ -239,4 +239,19 @@ function accueil(){
         </div>
     </header>";
     }
+function ajout(){
+    echo"<h2>Ajouter un utilisateur</h2>
+    <form method='POST' action='add_user.php'>
+        <label for='id'>Identifiant:</label>
+        <input type='text' name='id' required><br><br>
+        
+        <label for='password'>Mot de passe:</label>
+        <input type='password' name='password' required><br><br>
+        
+        <label for='role'>Rôle:</label>
+        <input type='text' name='role' required><br><br>
+        
+        <input type='submit' value='Ajouter'>
+    </form>";
+}
 ?>
