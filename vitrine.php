@@ -185,7 +185,7 @@ function info(){
             <p><strong>Notre Chef?</strong>  Mr. Italiano Lui-même<img src='https://www.w3schools.com/w3images/chef.jpg' style='width:150px'
                     class='w3-circle w3-right' alt='Chef'></p>
             <p>Nous sommes fiers de nos intérieurs.</p>
-            <img src='pizza_four.jpg' style='width:100%' class='w3-margin-top w3-margin-bottom'
+            <img src='pizza_chef.jpg' style='width:100%' class='w3-margin-top w3-margin-bottom'
                 alt='Restaurant'>
             <h1><b>Heure d'ouverture</b></h1>
 
@@ -240,18 +240,37 @@ function accueil(){
     </header>";
     }
 function ajout(){
-    echo"<h2>Ajouter un utilisateur</h2>
-    <form method='POST' action='add_user.php'>
-        <label for='id'>Identifiant:</label>
-        <input type='text' name='id' required><br><br>
-        
-        <label for='password'>Mot de passe:</label>
-        <input type='password' name='password' required><br><br>
-        
-        <label for='role'>Rôle:</label>
-        <input type='text' name='role' required><br><br>
-        
-        <input type='submit' value='Ajouter'>
-    </form>";
-}
+    echo "<h2 class='w3-center w3-black w3-padding-48 w3-xxlarge'>Ajouter un utilisateur</h2>
+    <div class='w3-center w3-black w3-padding-48 w3-xxlarge'>
+        <form method='POST' action='add_user.php'>
+            <label for='id'>Identifiant:</label>
+            <input type='text' name='id' required><br><br>
+            
+            <label for='password'>Mot de passe:</label>
+            <input type='password' name='password' required><br><br>
+            
+            <label for='role'>Rôle:</label>
+            <input type='text' name='role' required><br><br>
+            
+            <input type='submit' value='Ajouter'>
+        </form>
+    </div>";
+    }
+function supprimer(){
+    echo "<h2 class='w3-center w3-black w3-padding-48 w3-xxlarge'>Supprimer un utilisateur</h2>
+    <div class='w3-center w3-black w3-padding-48 w3-xxlarge'>
+        <form method='POST' action='del_user.php'>
+            <label for='id'>Identifiant:</label>
+            <input type='text' name='id' required><br><br>
+            
+            <label for='password'>Mot de passe:</label>
+            <input type='password' name='password' required><br><br>
+            
+            <label for='role'>Rôle:</label>
+            <input type='text' name='role' required><br><br>
+            
+            <input type='submit' value='Supprimer'>
+        </form>
+    </div>";
+    }
 ?>
