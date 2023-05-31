@@ -13,18 +13,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   foreach ($users as $user) {
     if ($user['username'] === $username && $user['password'] === $password) {
       $_SESSION['role'] = $user['role'];
-
-      // Redirection en fonction du rôle de l'utilisateur
-      if ($user['role'] === 'admin') {
-        header('Location: admin.php');
-      } else {
-        header('Location: user.php');
-      }
+      header('Location: accueil.php');
       exit;
     }
   }
+  header('Location: connexion.php');
+  echo '<script>alert("Identifiants invalides.");</script>';
 
-  echo 'Identifiants invalides.';
 }
 ?>
-
