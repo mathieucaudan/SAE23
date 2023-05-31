@@ -11,7 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Créer un nouvel utilisateur avec les données saisies
     $newUser = [
-        'id' => $id,
+        'username' => $id,
         'password' => $password,
         'role' => $role
     ];
@@ -23,7 +23,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $data = ['users' => $users];
     $jsonData = json_encode($data, JSON_PRETTY_PRINT);
     file_put_contents('users.json', $jsonData);
-
-    echo "Utilisateur ajouté avec succès.";
+     header("Location: parametre.php?success=1");
 }
 ?>
