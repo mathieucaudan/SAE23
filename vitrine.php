@@ -1,4 +1,5 @@
 <?php
+include 'login.php';
 function entete() {
     echo "<!DOCTYPE html>
     <html>
@@ -59,10 +60,20 @@ function navbar(){
             <a href='accueil.php' class='w3-bar-item w3-button'>ACCUEIL</a>
             <a href='menu.php' class='w3-bar-item w3-button'>MENU</a>
             <a href='info.php' class='w3-bar-item w3-button'>INFO</a>
-            <a href='contact.php' class='w3-bar-item w3-button'>CONTACT</a>
-            <a href='#'><img src='logo.png' style='float: right; width: 3%; border-radius: 50%' ></a>
-            <a href='connexion.php' style='float: right'><button type='button'>Connexion</button></a>
-            <style>
+            <a href='contact.php' class='w3-bar-item w3-button'>CONTACT</a>";
+            if (isset($_SESSION['role'])) {
+              if ($_SESSION['role'] == 'user') {
+                echo "<a href='compte.php' class='w3-bar-item w3-button'>Compte</a>";
+              } else if ($_SESSION['role'] == 'admin') {
+                echo "<a href='parametre.php' class='w3-bar-item w3-button'>Paramètres</a>";
+              }
+            }
+            echo"<a href='#'><img src='logo.png' style='float: right; width: 3%; border-radius: 50%' ></a>";
+            if (isset($_SESSION['role'])) {
+            echo"<a href='deconnexion.php' style='float: right'><button type='button'>Déconnexion</button></a>";}
+            else{echo"<a href='connexion.php' style='float: right'><button type='button'>Connexion</button></a>";}
+            if (isset($_SESSION['role'])) {echo"<a class='w3-bar-item' style='float: right'>Bienvenue";($_SESSION['role']);echo"</a>";}
+            echo"<style>
             button {
                 width: 100px;
                 height: 40px;
