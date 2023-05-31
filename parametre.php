@@ -9,15 +9,14 @@ echo "<div class='w3-container w3-black w3-padding-64 w3-xxlarge' id='menu'>
             <h1 class='w3-center w3-jumbo' style='margin-bottom:64px'>Utilisateur</h1>
             <div class='w3-row w3-center w3-border w3-border-dark-grey'>
                 <a href='javascript:void(0)' onclick='openMenu(event, \"ajouter\");' id='ajouter-link'>
-                    <div class='w3-col s6 tablink w3-padding-large w3-hover-red'>Ajouter</div>
-                </a>
+                    <div class='w3-col s6 tablink w3-padding-large w3-hover-red'>Ajouter</div>";
+                echo"</a>
                 <a href='javascript:void(0)' onclick='openMenu(event, \"supprimer\");' id='supprimer-link'>
-                    <div class='w3-col s6 tablink w3-padding-large w3-hover-red'>Supprimer</div>
-                </a>
+                    <div class='w3-col s6 tablink w3-padding-large w3-hover-red'>Supprimer</div>";
+                echo"</a>
             </div>
         </div>
-    </div>
-
+    
     <div id='ajouter' style='display:none;' class='menu'>"; // Début de la fonction 'Ajouter'
 ajout(); // Appel à la fonction ajout()
 echo "</div>"; // Fin de la fonction 'Ajouter'
@@ -25,7 +24,13 @@ echo "</div>"; // Fin de la fonction 'Ajouter'
 echo "<div id='supprimer' style='display:none;' class='menu'>"; // Début de la fonction 'Supprimer'
 supprimer(); // Appel à la fonction supprimer()
 echo "</div>"; // Fin de la fonction 'Supprimer'
-
+if (isset($_GET['success']) && $_GET['success'] == 1) {
+    echo '<center><a class="text-center">Ajout validé</a></center>';
+}
+else if (isset($_GET['success']) && $_GET['success'] == 2) {
+    echo '<center><a>Suppression validé</a></center>';
+}
+echo"</div>";
 echo "<script type='text/javascript'>
         function openMenu(evt, menuName) {
             console.log('test menu');
