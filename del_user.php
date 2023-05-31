@@ -15,7 +15,7 @@
         $users = $data['users'];
         $userIndex = null;
         foreach ($users as $index => $user) {
-            if ($user['id'] === $id && $user['password'] === $password) {
+            if ($user['username'] === $id && $user['password'] === $password) {
                 $userIndex = $index;
                 break;
             }
@@ -34,11 +34,13 @@
             // Enregistrer la chaîne JSON dans le fichier users.json
             file_put_contents('users.json', $jsonData);
 
-            echo "Utilisateur supprimé avec succès.";
+            echo '<script>alert("Utilisateur supprimé avec succès");</script>';
+
         } else {
-            echo "Identifiant ou mot de passe incorrect.";
+            echo '<script>alert("Identifiant ou mot de passe incorrect");</script>';
         }
     }
+    header("Location: parametre.php?success=2"); 
     
     
 ?>
