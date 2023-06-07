@@ -5,7 +5,7 @@ session_start();
 $jsonData = file_get_contents('users.json');
 $users = json_decode($jsonData, true)['users'];
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+if (!empty($_POST['username']) and !empty($_POST['password'])) {
   $username = $_POST['username'];
   $password = $_POST['password'];
 
@@ -22,3 +22,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 }
 ?>
+
