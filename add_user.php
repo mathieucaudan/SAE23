@@ -1,8 +1,11 @@
 <?php
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Récupérer les données saisies par l'utilisateur
-    $id = $_POST['id'];
+    $identifiant = $_POST['identifiant'];
     $password = $_POST['password'];
+    $nom = $_POST['nom'];
+    $prenom = $_POST['prenom'];
+    $mail = $_POST['mail'];
     $role = $_POST['role'];
 
     // Charger les données existantes du fichier users.json
@@ -11,9 +14,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Créer un nouvel utilisateur avec les données saisies
     $newUser = [
-        'username' => $id,
+        'identifiant' => $identifiant,
         'password' => $password,
-        'role' => $role
+        'role' => $role,
+        'nom' => $nom,
+        'mail' => $mail,
+        'prenom' => $prenom
     ];
 
     // Ajouter le nouvel utilisateur à la liste des utilisateurs
