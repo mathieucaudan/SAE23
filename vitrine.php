@@ -529,7 +529,104 @@ function client() {
         </center>
     </div>
     </div>";
+    }
+<?php
+function partage_fichier(){
+$repertoireStockage = '/var/www/html/';
+
+function afficherFichiers(){
+    global $repertoireStockage;
+    
+    $fichiers = scandir($repertoireStockage);
+    $fichiers = array_diff($fichiers, array('.', '..'));
+    
+    echo "Liste des fichiers :<br>";
+    foreach ($fichiers as $fichier) {
+        echo "$fichier<br>";
+    }
 }
+
+function telechargerFichier($fichierTemporaire, $nomFichier){
+    global $repertoireStockage;
+    
+    $cheminDestination = $repertoireStockage . $nomFichier;
+    
+    if (move_uploaded_file($fichierTemporaire, $cheminDestination)) {
+        echo "Le fichier a été téléchargé avec succès.<br>";
+    } else {
+        echo "Une erreur s'est produite lors du téléchargement du fichier.<br>";
+    }
+}
+
+function supprimerFichier($nomFichier){
+    global $repertoireStockage;
+    
+    $cheminFichier = $repertoireStockage . $nomFichier;
+    
+    if (unlink($cheminFichier)) {
+        echo "Le fichier a été supprimé avec succès.<br>";
+    } else {
+        echo "Une erreur s'est produite lors de la suppression du fichier.<br>";
+    }
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if ($_POST['action'] === 'upload') {
+        if (isset($_FILES['fichier'])) {
+            $fichierTemporaire = $_FILES['fichier']['tmp_name'];
+            $nomFichier = $_FILES['fichier']['name'];
+            telechargerFichier($fichierTemporaire, $nomFichier);
+        }
+    } elseif ($_POST['action'] === 'supprimer') {
+        if (isset($_POST['nomFichier'])) {
+            $nomFichier = $_POST['nomFichier'];
+            supprimerFichier($nomFichier);
+        }
+    }
+}
+
+afficherFichiers();
+
+function visualisationFichier($nomFichier){
+    global $repertoireStockage;
+
+
+
+}
+
+function cloud(){
+echo'
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cloud</title>
+</head>
+<body>
+    <h1>Cloud</h1>
+    <h2>Télécharger un fichier</h2>
+    <form method="post" enctype="multipart/form-data">
+        <input type="file" name="fichier" required>
+        <input type="hidden" name="action" value="upload">
+        <input type="submit" value="Télécharger">
+    </form>
+    <h2>Supprimer un fichier</h2>
+    <form method="post">
+        <select name="nomFichier">
+            <?php
+            $fichiers = scandir($repertoireStockage);
+            $fichiers = array_diff($fichiers, array('.', '..'));
+            foreach ($fichiers as $fichier) {
+                echo "<option value=\"$fichier\">$fichier</option>";
+            }
+            ?>
+        </select>
+        <input type="hidden" name="action" value="supprimer">
+        <input type="submit" value="Supprimer">
+    </form>
+    '    
+    }
+    }
+?>
 
 
 ?>
