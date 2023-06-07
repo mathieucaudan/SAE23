@@ -297,13 +297,14 @@ function ajout(){
             <label for='prenom'>Prenom:</label>
             <input type='text' name='prenom' required><br><br>
 
-            <label for='enom'>Nom:</label>
-            <input type='text' name='enom' required><br><br>
+            <label for='nom'>Nom:</label>
+            <input type='text' name='nom' required><br><br>
 
             <label for='mail'>Mail:</label>
             <input type='text' name='mail' required><br><br>
-            <label for='id'>identifiant:</label>
-            <input type='text' name='id' required><br><br>
+
+            <label for='identifiant'>identifiant:</label>
+            <input type='text' name='identifiant' required><br><br>
             
             <label for='password'>Mot de passe:</label>
             <input type='password' name='password' required><br><br>
@@ -416,7 +417,10 @@ function inscription(){
     
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Récupérer les données saisies par l'utilisateur
-        $id = $_POST['id'];
+        $identifiant = $_POST['identifiant'];
+        $nom = $_POST['nom'];
+        $prenom = $_POST['prenom'];
+        $mail = $_POST['mail'];
         $password = $_POST['password'];
         $confirm_password = $_POST['confirm_password'];
         $role = $_POST['role'];
@@ -433,7 +437,7 @@ function inscription(){
 
         // Créer un nouvel utilisateur avec les données saisies
         $newUser = [
-            'identifiant' => $id,
+            'identifiant' => $identifiant,
             'password' => $password,
             'role' => $role,
             'nom' => $nom,
@@ -457,8 +461,8 @@ function inscription(){
             <label for='prenom'>Prenom:</label>
             <input type='text' name='prenom' required><br><br>
 
-            <label for='enom'>Nom:</label>
-            <input type='text' name='enom' required><br><br>
+            <label for='nom'>Nom:</label>
+            <input type='text' name='nom' required><br><br>
 
             <label for='mail'>Mail:</label>
             <input type='text' name='mail' required><br><br>
@@ -495,9 +499,9 @@ function client() {
             <table>
                 <tr>
                     <th>Nom</th>
-                    <th>Prenom</th>
+                    <th>Prénom</th>
                     <th>Identifiant</th>
-                    <th>mail</th>
+                    <th>Email</th>
                 </tr>";
     
     // Charger le contenu du fichier users.json
@@ -509,12 +513,12 @@ function client() {
     // Récupérer le tableau des utilisateurs
     $users = $data['users'];
 
-    // Parcourir les utilisateurs et afficher les identifiants pour ceux ayant le rôle "user"
+    // Parcourir les utilisateurs et afficher les informations pour ceux ayant le rôle "user"
     foreach ($users as $user) {
         if ($user['role'] === 'user') {
             echo "<tr>
-                    <td>" . $user['Nom'] . "</td>
-                    <td>" . $user['Prenom'] . "</td>
+                    <td>" . $user['nom'] . "</td>
+                    <td>" . $user['prenom'] . "</td>
                     <td>" . $user['identifiant'] . "</td>
                     <td>" . $user['mail'] . "</td>
                   </tr>";
@@ -525,63 +529,7 @@ function client() {
         </center>
     </div>
     </div>";
-    }
-
-$repertoireStockage = '/var/www/html/';
-function afficherFichiers()
-{
-    global $repertoireStockage;
-    
-    $fichiers = scandir($repertoireStockage);
-    $fichiers = array_diff($fichiers, array('.', '..'));
-    
-    echo "Liste des fichiers :<br>";
-    foreach ($fichiers as $fichier) {
-        echo "$fichier<br>";
-    }
 }
 
-function telechargerFichier($fichierTemporaire, $nomFichier)
-{
-    global $repertoireStockage;
-    
-    $cheminDestination = $repertoireStockage . $nomFichier;
-    
-    if (move_uploaded_file($fichierTemporaire, $cheminDestination)) {
-        echo "Le fichier a été téléchargé avec succès.<br>";
-    } else {
-        echo "Une erreur s'est produite lors du téléchargement du fichier.<br>";
-    }
-}
-
-function supprimerFichier($nomFichier)
-{
-    global $repertoireStockage;
-    
-    $cheminFichier = $repertoireStockage . $nomFichier;
-    
-    if (unlink($cheminFichier)) {
-        echo "Le fichier a été supprimé avec succès.<br>";
-    } else {
-        echo "Une erreur s'est produite lors de la suppression du fichier.<br>";
-    }
-}
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if ($_POST['action'] === 'upload') {
-        if (isset($_FILES['fichier'])) {
-            $fichierTemporaire = $_FILES['fichier']['tmp_name'];
-            $nomFichier = $_FILES['fichier']['name'];
-            telechargerFichier($fichierTemporaire, $nomFichier);
-        }
-    } elseif ($_POST['action'] === 'supprimer') {
-        if (isset($_POST['nomFichier'])) {
-            $nomFichier = $_POST['nomFichier'];
-            supprimerFichier($nomFichier);
-        }
-    }
-}
-
-afficherFichiers();
 
 ?>
