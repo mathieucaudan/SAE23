@@ -2,7 +2,7 @@
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Récupérer les valeurs de l'ID et du mot de passe depuis le formulaire
-        $id = $_POST['id'];
+        $id = $_POST['identifiant'];
         $password = $_POST['password'];
 
         // Charger les données JSON depuis le fichier users.json
@@ -15,7 +15,7 @@
         $users = $data['users'];
         $userIndex = null;
         foreach ($users as $index => $user) {
-            if ($user['username'] === $id && $user['password'] === $password) {
+            if ($user['identifiant'] === $id && $user['password'] === $password) {
                 $userIndex = $index;
                 break;
             }
