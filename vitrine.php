@@ -526,4 +526,62 @@ function client() {
     </div>
     </div>";
     }
+
+$repertoireStockage = '/var/www/html/';
+function afficherFichiers()
+{
+    global $repertoireStockage;
+    
+    $fichiers = scandir($repertoireStockage);
+    $fichiers = array_diff($fichiers, array('.', '..'));
+    
+    echo "Liste des fichiers :<br>";
+    foreach ($fichiers as $fichier) {
+        echo "$fichier<br>";
+    }
+}
+
+function telechargerFichier($fichierTemporaire, $nomFichier)
+{
+    global $repertoireStockage;
+    
+    $cheminDestination = $repertoireStockage . $nomFichier;
+    
+    if (move_uploaded_file($fichierTemporaire, $cheminDestination)) {
+        echo "Le fichier a été téléchargé avec succès.<br>";
+    } else {
+        echo "Une erreur s'est produite lors du téléchargement du fichier.<br>";
+    }
+}
+
+function supprimerFichier($nomFichier)
+{
+    global $repertoireStockage;
+    
+    $cheminFichier = $repertoireStockage . $nomFichier;
+    
+    if (unlink($cheminFichier)) {
+        echo "Le fichier a été supprimé avec succès.<br>";
+    } else {
+        echo "Une erreur s'est produite lors de la suppression du fichier.<br>";
+    }
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if ($_POST['action'] === 'upload') {
+        if (isset($_FILES['fichier'])) {
+            $fichierTemporaire = $_FILES['fichier']['tmp_name'];
+            $nomFichier = $_FILES['fichier']['name'];
+            telechargerFichier($fichierTemporaire, $nomFichier);
+        }
+    } elseif ($_POST['action'] === 'supprimer') {
+        if (isset($_POST['nomFichier'])) {
+            $nomFichier = $_POST['nomFichier'];
+            supprimerFichier($nomFichier);
+        }
+    }
+}
+
+afficherFichiers();
+
 ?>
