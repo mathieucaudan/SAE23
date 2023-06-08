@@ -1,16 +1,20 @@
 {
-  "users": [
-    {
-      "id": 1,
-      "username": "admin",
-      "password": "password",
-      "role": "admin"
-    },
-    {
-      "id": 2,
-      "username": "user",
-      "password": "password",
-      "role": "user"
-    }
-  ]
+    "users": [
+        {
+            "identifiant": "mathieu",
+            "password": "password",
+            "role": "admin",
+            "nom": "caudan",
+            "mail": "mathieu@abs.com",
+            "prenom": "Mathieu"
+        },
+        {
+            "nom": "roman",
+            "prenom": "jean",
+            "identifiant": "test",
+            "mail": "mathieucaudan@icloud.com",
+            "password": "123",
+            "role": "user"
+        }
+    ]
 }

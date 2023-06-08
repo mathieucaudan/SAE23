@@ -64,7 +64,8 @@ function navbar(){
             if (isset($_SESSION['role'])) {
               if ($_SESSION['role'] == 'user') {
                 echo "<a href='compte.php' class='w3-bar-item w3-button'>Compte</a>";
-              } else if ($_SESSION['role'] == 'admin') {
+              } 
+            else if ($_SESSION['role'] == 'admin') {
                 echo "<a href='parametre.php' class='w3-bar-item w3-button'>Paramètres</a>
                 <a href='reservation.php' class='w3-bar-item w3-button'>Réservation</a>
                 <a href='client.php' class='w3-bar-item w3-button'>Client</a>
@@ -285,7 +286,8 @@ function accueil(){
             <span class='w3-tag w3-xlarge'>Ouvert tout les midi</span>
         </div>
         <div class='w3-display-middle w3-center'>
-            <span class='w3-text-white w3-hide-small' style='font-size:100px'>pizza<br>à pâte fine</span>
+            <span class='w3-text-white w3-hide-small' style='font-size:100px'><strong>La Bella Vita</strong></span>
+            <span class='w3-text-white w3-hide-small' style='font-size:50px'>Succombez aux plaisir de La Bella Vita</span>
             <span class='w3-text-white w3-hide-large w3-hide-medium' style='font-size:60px'><b>pizza<br>à pâte fine</b></span>
             <p><a href='menu.php' class='w3-button w3-xxlarge w3-black'>Montre moi le menu</a></p>
         </div>
@@ -405,12 +407,133 @@ function reservation() {
     echo "</div></div>";
     }
 function compte(){
-    echo "<div class='w3-container w3-black w3-padding-64 w3-xxlarge' id='compte'>
+    echo "<div class='w3-container w3-black w3-padding-64 w3-xxlarge' id='client'>
         <div class='w3-content'>
-            <h1 class='w3-center w3-jumbo' style='margin-bottom:64px'>Votre compte </h1>
+            <h1 class='w3-center w3-jumbo' style='margin-bottom:64px'>Client </h1>
             <div class='w3-row w3-center w3-border w3-border-dark-grey'></div>
         </div>
+    </div>
+
+    <div class='w3-container w3-padding-64 w3-black w3-xlarge'>
+        <div class='w3-content'>
+            <center>
+            <table>
+                <tr>
+                    <th>Nom</th>
+                    <th>Prénom</th>
+                    <th>Identifiant</th>
+                    <th>Mail</th>
+                    <th>Mot de passe</th>
+                </tr>";
+
+    // Charger le contenu du fichier users.json
+    $jsonString = file_get_contents('users.json');
+
+    // Décoder le contenu JSON en tableau associatif
+    $data = json_decode($jsonString, true);
+
+    // Récupérer le tableau des utilisateurs
+    $users = $data['users'];
+    // Parcourir les utilisateurs et afficher les informations pour ceux ayant le rôle "user"
+    foreach ($users as $user) {
+    if (isset($_SESSION['identifiant']) && $_SESSION['identifiant'] === $user['identifiant']) {
+        echo "
+            <tr>
+                <td>" . $user['nom'] . "</td>
+                <td>" . $user['prenom'] . "</td>
+                <td>" . $user['identifiant'] . "</td>
+                <td>" . $user['mail'] . "</td>
+                <td>" . $user['password'] . "</td>
+                <td>
+                    <button class='w3-button w3-black' onclick='modifierCompte(\"" . $user['identifiant'] . "\")'>Modifier</button>
+                </td>
+            </tr>
+            <tr id='modif_" . $user['identifiant'] . "' style='display: none;'>
+                <td colspan='5'>
+                    <h1>Modifier les informations du compte</h1>
+                    <form action='compte.php' method='POST'>
+                        <label for='email'>Nouvelle adresse e-mail :</label>
+                        <input type='email' name='email'><br><br>
+
+                        <label for='password'>Nouveau mot de passe :</label>
+                        <input type='password' name='password'><br><br>
+
+                        <label for='username'>Nouvel identifiant :</label>
+                        <input type='text' name='username'><br><br>
+
+                        <input class='w3-button w3-black' type='submit' value='Enregistrer les modifications'>
+                    </form>
+                </td>
+            </tr>";
+    }
+    }
+    echo "</table>";
+
+
+
+
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        // Récupérer les nouvelles informations du compte
+        $nouveauEmail = $_POST['email'];
+        $nouveauPassword = $_POST['password'];
+        $nouvelIdentifiant = $_POST['username'];
+
+        // Rechercher l'index de l'utilisateur correspondant dans le tableau
+        $index = array_search($_SESSION['identifiant'], array_column($users, 'identifiant'));
+
+        if ($index !== false) {
+            // Supprimer l'ancien compte de la liste des utilisateurs
+            unset($users[$index]);
+
+            // Créer un nouvel utilisateur avec les nouvelles informations
+            $nouvelIdentifiant = ($nouvelIdentifiant != null) ? $nouvelIdentifiant : $user['identifiant'];
+    $nouveauEmail = ($nouveauEmail != null) ? $nouveauEmail : $user['mail'];
+    $nouveauPassword = ($nouveauPassword != null) ? $nouveauPassword : $user['password'];
+
+    $nouvelUtilisateur = [
+        'nom' => $user['nom'],
+        'prenom' => $user['prenom'],
+        'identifiant' => $nouvelIdentifiant,
+        'mail' => $nouveauEmail,
+        'password' => $nouveauPassword,
+        'role' => $user['role']
+    ];
+
+
+            // Ajouter le nouvel utilisateur au tableau
+            $users[] = $nouvelUtilisateur;
+
+            // Mettre à jour le tableau des utilisateurs dans les données
+            $data['users'] = array_values($users);
+
+            // Encodage du tableau des utilisateurs en JSON
+            $jsonData = json_encode($data, JSON_PRETTY_PRINT);
+
+            // Écrire les modifications dans le fichier users.json
+            file_put_contents('users.json', $jsonData);
+
+            // Afficher un message de succès
+            echo "<p>Modifications enregistrées avec succès.</p>";
+        }
+    }
+
+    // Afficher le reste du contenu de la page
+    echo "</div>
+    </div>
     </div>";
+
+    // Ajouter le script JavaScript pour masquer/afficher les champs de modification du compte
+    echo "
+    <script>
+        function modifierCompte(identifiant) {
+            var modifRow = document.getElementById('modif_' + identifiant);
+            if (modifRow.style.display === 'none') {
+                modifRow.style.display = 'table-row';
+            } else {
+                modifRow.style.display = 'none';
+            }
+        }
+    </script>";
     }
 function inscription(){
     echo "<h2 class='w3-center w3-black w3-padding-48 w3-xxlarge'>Ajouter un utilisateur</h2>
@@ -438,12 +561,12 @@ function inscription(){
 
         // Créer un nouvel utilisateur avec les données saisies
         $newUser = [
+            'nom' => $nom,
+            'prenom' => $prenom,
+            'mail' => $mail,
             'identifiant' => $identifiant,
             'password' => $password,
             'role' => $role,
-            'nom' => $nom,
-            'mail' => $mail,
-            'prenom' => $prenom
         ];
 
         // Ajouter le nouvel utilisateur à la liste des utilisateurs
@@ -615,4 +738,5 @@ function partage() {
     }
 
     echo "</div></div>";
-}
+    }
+?>

@@ -14,12 +14,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Créer un nouvel utilisateur avec les données saisies
     $newUser = [
-        'identifiant' => $identifiant,
-        'password' => $password,
-        'role' => $role,
-        'nom' => $nom,
-        'mail' => $mail,
-        'prenom' => $prenom
+            'nom' => $nom,
+            'prenom' => $prenom,
+            'mail' => $mail,
+            'identifiant' => $identifiant,
+            'password' => $password,
+            'role' => $role,
     ];
 
     // Ajouter le nouvel utilisateur à la liste des utilisateurs

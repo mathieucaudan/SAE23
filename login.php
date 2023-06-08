@@ -13,6 +13,7 @@ if (!empty($_POST['identifiant']) and !empty($_POST['password'])) {
   foreach ($users as $user) {
     if ($user['identifiant'] === $identifiant && $user['password'] === $password) {
       $_SESSION['role'] = $user['role'];
+      $_SESSION['identifiant'] = $user['identifiant'];
       header('Location: accueil.php');
       exit;
     }
