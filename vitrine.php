@@ -67,7 +67,8 @@ function navbar(){
               } else if ($_SESSION['role'] == 'admin') {
                 echo "<a href='parametre.php' class='w3-bar-item w3-button'>Paramètres</a>
                 <a href='reservation.php' class='w3-bar-item w3-button'>Réservation</a>
-                <a href='client.php' class='w3-bar-item w3-button'>Client</a>";
+                <a href='client.php' class='w3-bar-item w3-button'>Client</a>
+                <a href='cloud.php' class='w3-bar-item w3-button'>Cloud</a>";
               }
             }
             echo"<a href='#'><img src='logo.png' style='float: right; width: 3%; border-radius: 50%' ></a>";
@@ -301,7 +302,7 @@ function ajout(){
             <input type='text' name='nom' required><br><br>
 
             <label for='mail'>Mail:</label>
-            <input type='text' name='mail' required><br><br>
+            <input type='email' name='mail' required><br><br>
 
             <label for='identifiant'>identifiant:</label>
             <input type='text' name='identifiant' required><br><br>
@@ -465,7 +466,7 @@ function inscription(){
             <input type='text' name='nom' required><br><br>
 
             <label for='mail'>Mail:</label>
-            <input type='text' name='mail' required><br><br>
+            <input type='email' name='mail' required><br><br>
 
             <label for='identifiant'>identifiant:</label>
             <input type='text' name='identifiant' required><br><br>
@@ -530,103 +531,88 @@ function client() {
     </div>
     </div>";
     }
-<?php
-function partage_fichier(){
-$repertoireStockage = '/var/www/html/';
+function partage() {
+    $dossierPartage = './partage/';
 
-function afficherFichiers(){
-    global $repertoireStockage;
-    
-    $fichiers = scandir($repertoireStockage);
-    $fichiers = array_diff($fichiers, array('.', '..'));
-    
-    echo "Liste des fichiers :<br>";
-    foreach ($fichiers as $fichier) {
-        echo "$fichier<br>";
-    }
-}
+    if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['action'])) {
+        if ($_GET['action'] === 'telecharger' && isset($_GET['fichier'])) {
+            $fichier = $_GET['fichier'];
+            $cheminFichier = $dossierPartage . $fichier;
 
-function telechargerFichier($fichierTemporaire, $nomFichier){
-    global $repertoireStockage;
-    
-    $cheminDestination = $repertoireStockage . $nomFichier;
-    
-    if (move_uploaded_file($fichierTemporaire, $cheminDestination)) {
-        echo "Le fichier a été téléchargé avec succès.<br>";
-    } else {
-        echo "Une erreur s'est produite lors du téléchargement du fichier.<br>";
-    }
-}
-
-function supprimerFichier($nomFichier){
-    global $repertoireStockage;
-    
-    $cheminFichier = $repertoireStockage . $nomFichier;
-    
-    if (unlink($cheminFichier)) {
-        echo "Le fichier a été supprimé avec succès.<br>";
-    } else {
-        echo "Une erreur s'est produite lors de la suppression du fichier.<br>";
-    }
-}
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if ($_POST['action'] === 'upload') {
-        if (isset($_FILES['fichier'])) {
-            $fichierTemporaire = $_FILES['fichier']['tmp_name'];
-            $nomFichier = $_FILES['fichier']['name'];
-            telechargerFichier($fichierTemporaire, $nomFichier);
-        }
-    } elseif ($_POST['action'] === 'supprimer') {
-        if (isset($_POST['nomFichier'])) {
-            $nomFichier = $_POST['nomFichier'];
-            supprimerFichier($nomFichier);
-        }
-    }
-}
-
-afficherFichiers();
-
-function visualisationFichier($nomFichier){
-    global $repertoireStockage;
-
-
-
-}
-
-function cloud(){
-echo'
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Cloud</title>
-</head>
-<body>
-    <h1>Cloud</h1>
-    <h2>Télécharger un fichier</h2>
-    <form method="post" enctype="multipart/form-data">
-        <input type="file" name="fichier" required>
-        <input type="hidden" name="action" value="upload">
-        <input type="submit" value="Télécharger">
-    </form>
-    <h2>Supprimer un fichier</h2>
-    <form method="post">
-        <select name="nomFichier">
-            <?php
-            $fichiers = scandir($repertoireStockage);
-            $fichiers = array_diff($fichiers, array('.', '..'));
-            foreach ($fichiers as $fichier) {
-                echo "<option value=\"$fichier\">$fichier</option>";
+            if (file_exists($cheminFichier)) {
+                if (!headers_sent()) {
+                    header('Content-Description: File Transfer');
+                    header('Content-Type: application/octet-stream');
+                    header('Content-Disposition: attachment; filename="' . $fichier . '"');
+                    header('Content-Length: ' . filesize($cheminFichier));
+                    readfile($cheminFichier);
+                    exit;
+                } else {
+                    echo "<p class='w3-text-red'>Impossible de télécharger le fichier. Veuillez réessayer.</p>";
+                }
+            } else {
+                echo "<p class='w3-text-red'>Le fichier n'existe pas.</p>";
             }
-            ?>
-        </select>
-        <input type="hidden" name="action" value="supprimer">
-        <input type="submit" value="Supprimer">
-    </form>
-    '    
-    }
-    }
-?>
+        } elseif ($_GET['action'] === 'supprimer' && isset($_GET['fichier'])) {
+            $fichier = $_GET['fichier'];
+            $cheminFichier = $dossierPartage . $fichier;
 
+            if (file_exists($cheminFichier)) {
+                if (unlink($cheminFichier)) {
+                    echo "<p class='w3-text-green'>Fichier supprimé avec succès !</p>";
+                } else {
+                    echo "<p class='w3-text-red'>Erreur lors de la suppression du fichier.</p>";
+                }
+            } else {
+                echo "<p class='w3-text-red'>Le fichier n'existe pas.</p>";
+            }
+        }
+    }
 
-?>
+    echo "
+    <div class='w3-container w3-black w3-padding-64 w3-xxlarge' id='fichier'>
+        <div class='w3-content'>
+            <h1 class='w3-center w3-jumbo' style='margin-bottom:64px'>Fichier</h1>
+            <div class='w3-row w3-center w3-border w3-border-dark-grey'></div>
+        </div>
+    </div>";
+
+    echo "
+    <div class='w3-container w3-padding-64 w3-black w3-xlarge'>
+        <div class='w3-content'>
+            <form class='w3-container' action='' method='POST' enctype='multipart/form-data'>
+                <label class='w3-text-white'>Sélectionner un fichier :</label>
+                <input class='w3-input w3-border w3-black' type='file' name='fichier'>
+                <br>
+                <input class='w3-button w3-black' type='submit' value='Partager'>
+            </form>";
+
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['fichier'])) {
+        $fichierTemporaire = $_FILES['fichier']['tmp_name'];
+        $nomFichier = $_FILES['fichier']['name'];
+        $cheminFichier = $dossierPartage . $nomFichier;
+
+        if (move_uploaded_file($fichierTemporaire, $cheminFichier)) {
+            echo "<p class='w3-text-green'>Fichier partagé avec succès !</p>";
+        } else {
+            echo "<p class='w3-text-red'>Erreur lors du partage du fichier.</p>";
+        }
+    }
+
+    echo "<h2 class='w3-center'>Liste des fichiers partagés :</h2>";
+
+    $fichiers = glob($dossierPartage . '*');
+
+    if (count($fichiers) > 0) {
+        echo "<ul class='w3-ul'>";
+        foreach ($fichiers as $fichier) {
+            $nomFichier = basename($fichier);
+            echo "<li class='w3-padding'><span class='w3-large'>$nomFichier</span> <a class='w3-button w3-black' href='?action=telecharger&fichier=$nomFichier'>Télécharger</a> <a class='w3-button w3-black' href='?action=supprimer&fichier=$nomFichier'>Supprimer</a></li>";
+        }
+        echo "</ul>";
+    } else {
+        echo "<p class='w3-center'>Aucun fichier partagé.</p>";
+    }
+
+    echo "</div></div>";
+}
