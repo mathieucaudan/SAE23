@@ -5,13 +5,13 @@ session_start();
 $jsonData = file_get_contents('users.json');
 $users = json_decode($jsonData, true)['users'];
 
-if (!empty($_POST['username']) and !empty($_POST['password'])) {
-  $username = $_POST['username'];
+if (!empty($_POST['identifiant']) and !empty($_POST['password'])) {
+  $identifiant = $_POST['identifiant'];
   $password = $_POST['password'];
 
   // Vérification des identifiants de connexion
   foreach ($users as $user) {
-    if ($user['username'] === $username && $user['password'] === $password) {
+    if ($user['identifiant'] === $identifiant && $user['password'] === $password) {
       $_SESSION['role'] = $user['role'];
       header('Location: accueil.php');
       exit;
