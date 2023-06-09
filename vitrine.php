@@ -60,6 +60,7 @@ function navbar(){
             <a href='accueil.php' class='w3-bar-item w3-button'>ACCUEIL</a>
             <a href='menu.php' class='w3-bar-item w3-button'>MENU</a>
             <a href='info.php' class='w3-bar-item w3-button'>INFO</a>
+            <a href='partenaire.php' class='w3-bar-item w3-button'>PARTENAIRE</a>
             <a href='contact.php' class='w3-bar-item w3-button'>CONTACT</a>";
             if (isset($_SESSION['role'])) {
               if ($_SESSION['role'] == 'user') {
