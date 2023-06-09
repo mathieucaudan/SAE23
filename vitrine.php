@@ -195,11 +195,12 @@ function info(){
     echo"<div class='w3-container w3-padding-64 w3-red w3-grayscale w3-xlarge' id='about'>
         <div class='w3-content'>
             <h1 class='w3-center w3-jumbo' style='margin-bottom:64px'>Qui Sommes Nous</h1>
-            <p>Le Restaurant Pizza a été fondé à Blabla par M. En italien, il est très important d'être suivi minutieusement par le système éducatif, mais en même temps, il arrive qu'il y ait beaucoup de travail et de douleur. Pour au moins
-                Allez, personne ne devrait pratiquer n'importe quel type de travail, sauf pour en tirer un avantage.</p>
-            <p><strong>Notre Chef?</strong>  Mr. Italiano Lui-même<img src='https://www.w3schools.com/w3images/chef.jpg' style='width:150px'
+            <p>Nous sommes originaire d'italie, de la belle région de Naples, la terre d'origines des fameuses pizza. Nous avons décidé de venir en France et plus particulièrement en Bretagne pour découvrir le paysage et faire gouter nos spécialités a cette région. cela fait déjà 8 ans que nous nous sommes installé dans la région d'Ille-et-Vilaine, dans la ville de Saint Malo.
+               Nos parents été eux-mêmes restaurateurs. Notre enfance a été berçé par la chaleure des fours, l'odeur de la farine, de la pâte fraichement cuite, l'odeur des oliviers, du basilic, le chants des oiseaux. Nous sommes tous passionés par l'art qu'est la cuisine. Notre chef suprême Brivealo, est dans la restauration depuis tous jeunes, et rêvait de vivre en Bretagne. De plus nous utilisons des produits frais locaux, ce qui a permis de pouvoir mélanger les cultures.
+            </p>
+            <p><strong>Notre Chef?</strong>  Mr. Brivaelo Lui-même<img src='https://www.w3schools.com/w3images/chef.jpg' style='width:150px'
                     class='w3-circle w3-right' alt='Chef'></p>
-            <p>Nous sommes fiers de nos intérieurs.</p>
+            <p>Nous sommes fiers de nos origines.</p>
             <img src='pizza_chef.jpg' style='width:100%' class='w3-margin-top w3-margin-bottom'
                 alt='Restaurant'>
             <h1><b>Heure d'ouverture</b></h1>
