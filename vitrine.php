@@ -77,7 +77,7 @@ function navbar(){
             if (isset($_SESSION['role'])) {
             echo"<a href='deconnexion.php' style='float: right'><button type='button'>Déconnexion</button></a>";}
             else{echo"<a href='connexion.php' style='float: right'><button type='button'>Connexion</button></a>";}
-            if (isset($_SESSION['role'])) {echo"<a class='w3-bar-item' style='float: right'>Bienvenue";($_SESSION['role']);echo"</a>";}
+            if (isset($_SESSION['role'])) {echo"<a class='w3-bar-item' style='float: right'>Bienvenue ";echo($_SESSION['identifiant']);echo"</a>";}
             echo"<style>
             button {
                 width: 100px;
@@ -288,7 +288,7 @@ function accueil(){
             <span class='w3-tag w3-xlarge'>Ouvert tout les midi</span>
         </div>
         <div class='w3-display-middle w3-center'>
-            <span class='w3-text-white w3-hide-small' style='font-size:100px'><strong>La Bella Vita</strong></span>
+            <span class='w3-text-white w3-hide-small' style='font-size:100px'><strong>La Bella Vita<br></strong></span>
             <span class='w3-text-white w3-hide-small' style='font-size:50px'>Succombez aux plaisir de La Bella Vita</span>
             <span class='w3-text-white w3-hide-large w3-hide-medium' style='font-size:60px'><b>pizza<br>à pâte fine</b></span>
             <p><a href='menu.php' class='w3-button w3-xxlarge w3-black'>Montre moi le menu</a></p>
@@ -743,10 +743,10 @@ function partage() {
     }
 function partenaire(){
 	echo '
-<br>
-<div class="container">
-<p> Ici, vous retrouverez les entreprises avec lequelles nous collaborons pour vous satisfaire. </p>
-</div>
+    <br>
+    <div class="container">
+    <p> Ici, vous retrouverez les entreprises avec lequelles nous collaborons pour vous satisfaire. </p>
+    </div>
     <div class="container">
         <div class="row g-5">
             <div class="col-3 ">
@@ -791,6 +791,5 @@ function partenaire(){
             </div>
         </div>
     </div>';
-};
-
+    };
 ?>

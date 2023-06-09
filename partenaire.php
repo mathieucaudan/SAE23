@@ -1,5 +1,6 @@
 <?php
-entet();
+include("vitrine.php");
+entete();
 echo'<body>';
 navbar();
 partenaire();

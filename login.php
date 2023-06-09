@@ -4,7 +4,6 @@ session_start();
 // Charger les données des utilisateurs depuis le fichier JSON
 $jsonData = file_get_contents('users.json');
 $users = json_decode($jsonData, true)['users'];
-
 if (!empty($_POST['identifiant']) and !empty($_POST['password'])) {
   $identifiant = $_POST['identifiant'];
   $password = $_POST['password'];

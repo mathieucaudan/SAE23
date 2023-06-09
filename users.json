@@ -2,11 +2,11 @@
     "users": [
         {
             "nom": "caudan",
-	    "prenom": "Mathieu"            
-	    "identifiant": "mathieu",
+            "prenom": "Mathieu",
+            "identifiant": "mathieu",
             "mail": "mathieu@abs.com",
-	    "password": "password",
-            "role": "admin",
+            "password": "password",
+            "role": "admin"
         },
         {
             "nom": "tiennot",
@@ -31,22 +31,6 @@
             "mail": "dilanyilmaz@abs.com",
             "password": "password",
             "role": "admin"
-        },
-        {
-            "nom": "Jane",
-            "prenom": "Smith",
-            "identifiant": "janesmith",
-            "mail": "janesmith@example.com",
-            "password": "secret",
-            "role": "user"
-        },
-        {
-            "nom": "Alex",
-            "prenom": "Johnson",
-            "identifiant": "alexjohnson",
-            "mail": "alexjohnson@example.com",
-            "password": "abc123",
-            "role": "user"
         },
         {
             "nom": "Emily",
@@ -254,6 +238,22 @@
             "identifiant": "samuelturner",
             "mail": "samuelturner@example.com",
             "password": "mypassword12345",
+            "role": "user"
+        },
+        {
+            "nom": "Samuel",
+            "prenom": "Turner",
+            "identifiant": "samuelturner",
+            "mail": "test@test.pom",
+            "password": "mypassword12345",
+            "role": "user"
+        },
+        {
+            "nom": "Samuel",
+            "prenom": "Turner",
+            "identifiant": "samuelturner",
+            "mail": "test@test.pom",
+            "password": "456",
             "role": "user"
         }
     ]
